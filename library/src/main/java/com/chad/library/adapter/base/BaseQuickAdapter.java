@@ -545,6 +545,9 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends Recy
      * @param newData  the new data collection
      */
     public void addData(@IntRange(from = 0) int position, @NonNull Collection<? extends T> newData) {
+        if (newData == null || newData.isEmpty()) {
+            return;
+        }
         mData.addAll(position, newData);
         notifyItemRangeInserted(position + getHeaderLayoutCount(), newData.size());
         compatibilityDataSizeChanged(newData.size());
@@ -556,6 +559,9 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends Recy
      * @param newData the new data collection
      */
     public void addData(@NonNull Collection<? extends T> newData) {
+        if (newData == null || newData.isEmpty()) {
+            return;
+        }
         mData.addAll(newData);
         notifyItemRangeInserted(mData.size() - newData.size() + getHeaderLayoutCount(), newData.size());
         compatibilityDataSizeChanged(newData.size());
@@ -969,6 +975,7 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends Recy
 
     /**
      * override this method if you want to override click event logic
+     *
      * @param v
      * @param position
      */
@@ -978,6 +985,7 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends Recy
 
     /**
      * override this method if you want to override longClick event logic
+     *
      * @param v
      * @param position
      * @return
@@ -1342,9 +1350,9 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends Recy
 
     /**
      * bind recyclerView {@link #bindToRecyclerView(RecyclerView)} before use!
-     * Recommend you to use {@link #setEmptyView(layoutResId,viewGroup)}
-     * @see #bindToRecyclerView(RecyclerView)
+     * Recommend you to use {@link #setEmptyView(layoutResId, viewGroup)}
      *
+     * @see #bindToRecyclerView(RecyclerView)
      */
     @Deprecated
     public void setEmptyView(int layoutResId) {
