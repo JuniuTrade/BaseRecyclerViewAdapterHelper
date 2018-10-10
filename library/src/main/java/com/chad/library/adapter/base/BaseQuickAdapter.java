@@ -484,7 +484,6 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends Recy
         notifyDataSetChanged();
     }
 
-
     /**
      * insert  a item associated with the specified position of adapter
      *
@@ -580,6 +579,15 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends Recy
             mData.addAll(data);
         }
         notifyDataSetChanged();
+    }
+
+    /**
+     * 替换数据列表，但是不会触发刷新
+     *
+     * @param data
+     */
+    public void replaceData(@Nullable List<T> data) {
+        mData = data;
     }
 
     /**
